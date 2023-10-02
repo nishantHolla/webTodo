@@ -102,6 +102,9 @@ const TodoManager = new class {
         console.log(this.#dataBase)
     }
 
+    getDataBase() {
+        return this.#dataBase
+    }
 }
 
 export default TodoManager
