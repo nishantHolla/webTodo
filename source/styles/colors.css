@@ -26,3 +26,10 @@
     --header-fg: var(--color-black);
 
 }
+
+* {
+    --trainstion-time: 0.3s;
+
+    transition: color var(--trainstion-time),
+                background var(--trainstion-time)
+}

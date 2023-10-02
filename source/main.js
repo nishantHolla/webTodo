@@ -7,4 +7,6 @@ TodoManager.addCollection('collection A')
 TodoManager.addTodo('task 1', 'description of task 1', 0)
 TodoManager.addCollection('collection B')
 TodoManager.addTodo('task 2', 'description of task 2', 0)
+
+UiManager.makeThemeSwitcher()
 UiManager.makeUi(TodoManager.getDataBase())

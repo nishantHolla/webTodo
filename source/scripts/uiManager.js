@@ -1,6 +1,30 @@
 
 const UiManager = new class {
 
+    makeThemeSwitcher() {
+        const DOM_ROOT = document.querySelector('html')
+        DOM_ROOT.dataset.theme = 'light'
+
+        const DOM_HEADER = document.querySelector('header')
+        const THEME_ICON = document.createElement('span')
+        THEME_ICON.classList.add('material-symbols-outlined', 'theme-icon', 'pointer', 'flex-center')
+        THEME_ICON.innerText = 'dark_mode'
+
+        THEME_ICON.addEventListener('click', () => {
+            if (THEME_ICON.innerText == 'dark_mode') {
+                THEME_ICON.innerText = 'light_mode'
+                DOM_ROOT.dataset.theme = 'dark'
+            }
+
+            else {
+                THEME_ICON.innerText = 'dark_mode'
+                DOM_ROOT.dataset.theme = 'light'
+            }
+        })
+
+        DOM_HEADER.appendChild(THEME_ICON)
+    }
+
     makeTodo(todo, DOM_TARGET) {
         const DOM_TODO_CONTAINER = document.createElement('div')
         DOM_TODO_CONTAINER.classList.add('todo-container')
