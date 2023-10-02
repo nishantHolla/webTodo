@@ -1,4 +1,7 @@
 
+import TodoManager from "./todoManager.js"
+import Todomanager from "./todoManager.js"
+
 const UiManager = new class {
 
     makeThemeSwitcher() {
@@ -93,7 +96,23 @@ const UiManager = new class {
         DOM_TARGET.appendChild(DOM_EXPANDER)
     }
 
-    makeCollection(collection, DOM_TARGET) {
+    makeAddCollectionButton(DOM_TARGET) {
+        const DOM_ADD_BUTTON = document.createElement('div')
+        DOM_ADD_BUTTON.innerText = 'add'
+        DOM_ADD_BUTTON.classList.add(
+            'new-collection-icon', 'pointer', 'collection-container',
+            'flex-center', 'material-symbols-outlined'
+        )
+
+        DOM_ADD_BUTTON.addEventListener('click', () => {
+            TodoManager.addCollection('New collection')
+            this.makeCollection(TodoManager.getCollection(-1), DOM_TARGET, DOM_ADD_BUTTON)
+        })
+
+        return DOM_ADD_BUTTON
+    }
+
+    makeCollection(collection, DOM_TARGET, DOM_SIBLING) {
         const DOM_COLLECTION_CONTAINER = document.createElement('div')
         DOM_COLLECTION_CONTAINER.classList.add('collection-container')
 
@@ -117,21 +136,24 @@ const UiManager = new class {
         DOM_COLLECTION_CONTAINER.appendChild(DOM_COLLECTION_HEADER)
         DOM_COLLECTION_CONTAINER.appendChild(DOM_COLLECTION_LIST)
 
-        DOM_TARGET.appendChild(DOM_COLLECTION_CONTAINER)
+        DOM_TARGET.insertBefore(DOM_COLLECTION_CONTAINER, DOM_SIBLING)
         return DOM_COLLECTION_CONTAINER
     }
 
     makeUi(dataBase) {
         const DOM_MAIN = document.querySelector('main')
+        const DOM_ADD_COLLECTION_BUTTON = this.makeAddCollectionButton(DOM_MAIN)
+        DOM_MAIN.appendChild(DOM_ADD_COLLECTION_BUTTON)
 
         dataBase.forEach(collection => {
-            const DOM_COLLECTION_CONTAINER = this.makeCollection(collection, DOM_MAIN)
+            const DOM_COLLECTION_CONTAINER = this.makeCollection(collection, DOM_MAIN, DOM_ADD_COLLECTION_BUTTON)
 
             collection.todos.forEach(todo => {
                 const DOM_COLLECTION_LIST = DOM_COLLECTION_CONTAINER.querySelector('.collection-list')
                 const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_LIST)
             })
         })
+
 
     }
 
