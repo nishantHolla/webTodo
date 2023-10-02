@@ -1,5 +1,5 @@
 
-import Style from "./styles/style.scss"
+import Style from "./styles/style.css"
 import TodoManager from "./scripts/todoManager.js"
 import UiManager from "./scripts/uiManager.js"
 

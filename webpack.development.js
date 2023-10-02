@@ -37,7 +37,7 @@ const developmentConfig = {
 			{
 				test: /\.css$/,
 				use: [
-					MiniCssExtractPlugin.loader,
+					"style-loader",
 					"css-loader"
 				]
 			}
