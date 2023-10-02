@@ -57,6 +57,22 @@ const UiManager = new class {
         DOM_TODO_TITLE.classList.add('todo-heading')
         DOM_TODO_TITLE.innerText = todo.title
 
+        const DOM_TODO_TITLE_INPUT = document.createElement('input')
+        DOM_TODO_TITLE_INPUT.classList.add('todo-title-input')
+
+        DOM_TODO_TITLE.addEventListener('click', () => {
+            DOM_TODO_TITLE_INPUT.value = DOM_TODO_TITLE.innerText
+            DOM_TODO_HEADER.replaceChild(DOM_TODO_TITLE_INPUT, DOM_TODO_TITLE)
+            DOM_TODO_TITLE_INPUT.focus()
+        })
+
+        DOM_TODO_TITLE_INPUT.addEventListener('focusout', () => {
+            DOM_TODO_TITLE.innerText = DOM_TODO_TITLE_INPUT.value
+            DOM_TODO_HEADER.replaceChild(DOM_TODO_TITLE, DOM_TODO_TITLE_INPUT)
+            todo.title = DOM_TODO_TITLE.innerText
+        })
+
+
         const DOM_TODO_MESSAGE = document.createElement('p')
         DOM_TODO_MESSAGE.classList.add('todo-message')
         DOM_TODO_MESSAGE.innerText = todo.message
