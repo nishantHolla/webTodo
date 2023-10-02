@@ -25,14 +25,9 @@ const UiManager = new class {
         DOM_HEADER.appendChild(THEME_ICON)
     }
 
-    makeTodo(todo, DOM_TARGET, isExpanded) {
+    makeTodo(todo, DOM_TARGET) {
         const DOM_TODO_CONTAINER = document.createElement('div')
         DOM_TODO_CONTAINER.classList.add('todo-container')
-
-        if (isExpanded)
-            DOM_TODO_CONTAINER.classList.add('todo-container-visible')
-        else
-            DOM_TODO_CONTAINER.classList.add('todo-container-hidden')
 
         const DOM_TODO_HEADER = document.createElement('div')
         DOM_TODO_HEADER.classList.add('todo-header')
@@ -54,6 +49,31 @@ const UiManager = new class {
         return DOM_TODO_CONTAINER
     }
 
+    makeCollectionExpand(DOM_TARGET, DOM_LIST, collection) {
+        const DOM_EXPANDER = document.createElement('span')
+        DOM_EXPANDER.classList.add('material-symbols-outlined', 'collection-expand-icon', 'pointer', 'flex-center')
+        DOM_EXPANDER.innerText = collection.expanded ? 'expand_more' : 'expand_less'
+
+        DOM_EXPANDER.addEventListener('click', () => {
+            if (DOM_EXPANDER.innerText === 'expand_more') {
+                DOM_EXPANDER.innerText = 'expand_less'
+                DOM_LIST.classList.add('collection-list-hidden')
+                DOM_LIST.classList.remove('collection-list-visible')
+                collection.expanded = false
+            }
+
+            else {
+                DOM_EXPANDER.innerText = 'expand_more'
+                DOM_LIST.classList.remove('collection-list-hidden')
+                DOM_LIST.classList.add('collection-list-visible')
+                collection.expanded = true
+            }
+
+        })
+
+        DOM_TARGET.appendChild(DOM_EXPANDER)
+    }
+
     makeCollection(collection, DOM_TARGET) {
         const DOM_COLLECTION_CONTAINER = document.createElement('div')
         DOM_COLLECTION_CONTAINER.classList.add('collection-container')
@@ -67,7 +87,12 @@ const UiManager = new class {
 
         const DOM_COLLECTION_LIST = document.createElement('div')
         DOM_COLLECTION_LIST.classList.add('collection-list')
+        if (collection.expanded)
+            DOM_COLLECTION_LIST.classList.add('collection-list-visible')
+        else
+            DOM_COLLECTION_LIST.classList.add('collection-list-hidden')
 
+        this.makeCollectionExpand(DOM_COLLECTION_HEADER, DOM_COLLECTION_LIST, collection)
         DOM_COLLECTION_HEADER.appendChild(DOM_COLLECTION_HEADING)
 
         DOM_COLLECTION_CONTAINER.appendChild(DOM_COLLECTION_HEADER)
@@ -85,7 +110,7 @@ const UiManager = new class {
 
             collection.todos.forEach(todo => {
                 const DOM_COLLECTION_LIST = DOM_COLLECTION_CONTAINER.querySelector('.collection-list')
-                const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_LIST, collection.expanded)
+                const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_LIST)
             })
         })
 

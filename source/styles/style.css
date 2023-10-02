@@ -38,6 +38,12 @@ main {
     border-radius: 10px;
 }
 
+.collection-header {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}
+
 .collection-heading {
     font-size: clamp(1rem, 5vw, 1.5rem);
     font-weight: 700;
@@ -47,21 +53,23 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
-}
-
-.todo-container {
     overflow: hidden;
 }
 
-.todo-container-visible {
+.collection-list-visible {
     max-height: 100vh;
-    padding: 0.3rem;
-    border: 3px solid var(--todo-container-border-clr);
-    border-radius: 10px;
+    transition: max-height 1s;
 }
 
-.todo-container-hidden {
-    max-height: 0;
+.collection-list-hidden {
+    max-height: 0px;
+    transition: max-height 0.5s;
+}
+
+.todo-container {
+    border: 3px solid var(--todo-container-border-clr);
+    padding: 0.3rem;
+    border-radius: 10px;
 }
 
 .todo-heading {
