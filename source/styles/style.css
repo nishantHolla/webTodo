@@ -57,19 +57,32 @@ main {
 }
 
 .collection-list-visible {
+    margin-top: 10px;
     max-height: 100vh;
-    transition: max-height 1s;
+    transition: margin 0.2s, max-height 1s;
 }
 
 .collection-list-hidden {
     max-height: 0px;
-    transition: max-height 0.5s;
+    transition: margin 0.2s, max-height 0.5s;
 }
 
 .todo-container {
     border: 3px solid var(--todo-container-border-clr);
-    padding: 0.3rem;
+    padding: 0.5rem;
     border-radius: 10px;
+    transform: color 0.3s;
+}
+
+.todo-container.strike-through {
+    color: var(--color-gray);
+    transform: color 0.3s;
+}
+
+.todo-header {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
 }
 
 .todo-heading {

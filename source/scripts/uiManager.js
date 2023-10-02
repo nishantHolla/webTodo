@@ -25,6 +25,24 @@ const UiManager = new class {
         DOM_HEADER.appendChild(THEME_ICON)
     }
 
+    makeTodoCheckbox(DOM_TARGET, todo) {
+        const DOM_CHECKBOX = document.createElement('input')
+        DOM_CHECKBOX.type = 'checkbox'
+
+        DOM_CHECKBOX.addEventListener('change', () => {
+            if (DOM_CHECKBOX.checked) {
+                DOM_TARGET.classList.add('strike-through')
+                todo.done = true
+            }
+            else {
+                DOM_TARGET.classList.remove('strike-through')
+                todo.done = false
+            }
+        })
+
+        return DOM_CHECKBOX
+    }
+
     makeTodo(todo, DOM_TARGET) {
         const DOM_TODO_CONTAINER = document.createElement('div')
         DOM_TODO_CONTAINER.classList.add('todo-container')
@@ -40,6 +58,7 @@ const UiManager = new class {
         DOM_TODO_MESSAGE.classList.add('todo-message')
         DOM_TODO_MESSAGE.innerText = todo.message
 
+        DOM_TODO_HEADER.appendChild(this.makeTodoCheckbox(DOM_TODO_CONTAINER, todo))
         DOM_TODO_HEADER.appendChild(DOM_TODO_TITLE)
 
         DOM_TODO_CONTAINER.appendChild(DOM_TODO_HEADER)
