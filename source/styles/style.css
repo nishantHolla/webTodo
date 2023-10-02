@@ -24,3 +24,20 @@ header {
     font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 700;
 }
+
+main {
+    padding: 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+.collection-container {
+    padding: 1rem 0.4rem;
+    border: 5px solid var(--collection-container-border-clr);
+    border-radius: 10px;
+}
+
+.collection-heading {
+    font-size: clamp(1rem, 5vw, 1.5rem);
+}
