@@ -123,6 +123,21 @@ const UiManager = new class {
         DOM_COLLECTION_HEADING.classList.add('collection-heading')
         DOM_COLLECTION_HEADING.innerText = collection.name
 
+        const DOM_COLLECTION_HEADING_INPUT = document.createElement('input')
+        DOM_COLLECTION_HEADING_INPUT.classList.add('collection-heading-input')
+
+        DOM_COLLECTION_HEADING.addEventListener('click', () => {
+            DOM_COLLECTION_HEADING_INPUT.value = DOM_COLLECTION_HEADING.innerText
+            DOM_COLLECTION_HEADER.replaceChild(DOM_COLLECTION_HEADING_INPUT, DOM_COLLECTION_HEADING)
+            DOM_COLLECTION_HEADING_INPUT.focus()
+        })
+
+        DOM_COLLECTION_HEADING_INPUT.addEventListener('focusout', () => {
+            DOM_COLLECTION_HEADING.innerText = DOM_COLLECTION_HEADING_INPUT.value
+            DOM_COLLECTION_HEADER.replaceChild(DOM_COLLECTION_HEADING, DOM_COLLECTION_HEADING_INPUT)
+            collection.name = DOM_COLLECTION_HEADER.innerText
+        })
+
         const DOM_COLLECTION_LIST = document.createElement('div')
         DOM_COLLECTION_LIST.classList.add('collection-list')
         if (collection.expanded)
