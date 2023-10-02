@@ -33,11 +33,38 @@ main {
 }
 
 .collection-container {
-    padding: 1rem 0.4rem;
+    padding: 0.4rem;
     border: 5px solid var(--collection-container-border-clr);
     border-radius: 10px;
 }
 
 .collection-heading {
     font-size: clamp(1rem, 5vw, 1.5rem);
+    font-weight: 700;
+}
+
+.collection-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.todo-container {
+    overflow: hidden;
+}
+
+.todo-container-visible {
+    max-height: 100vh;
+    padding: 0.3rem;
+    border: 3px solid var(--todo-container-border-clr);
+    border-radius: 10px;
+}
+
+.todo-container-hidden {
+    max-height: 0;
+}
+
+.todo-heading {
+    font-size: clamp(1rem, 5vw, 1.2rem);
+    font-weight: 500;
 }

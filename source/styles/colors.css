@@ -16,6 +16,7 @@
     --header-fg: var(--color-white);
 
     --collection-container-border-clr: var(--color-black);
+    --todo-container-border-clr: var(--color-black);
 
 }
 
@@ -28,6 +29,7 @@
     --header-fg: var(--color-black);
 
     --collection-container-border-clr: var(--color-white);
+    --todo-container-border-clr: var(--color-white);
 }
 
 * {

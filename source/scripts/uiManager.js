@@ -25,9 +25,14 @@ const UiManager = new class {
         DOM_HEADER.appendChild(THEME_ICON)
     }
 
-    makeTodo(todo, DOM_TARGET) {
+    makeTodo(todo, DOM_TARGET, isExpanded) {
         const DOM_TODO_CONTAINER = document.createElement('div')
         DOM_TODO_CONTAINER.classList.add('todo-container')
+
+        if (isExpanded)
+            DOM_TODO_CONTAINER.classList.add('todo-container-visible')
+        else
+            DOM_TODO_CONTAINER.classList.add('todo-container-hidden')
 
         const DOM_TODO_HEADER = document.createElement('div')
         DOM_TODO_HEADER.classList.add('todo-header')
@@ -79,7 +84,8 @@ const UiManager = new class {
             const DOM_COLLECTION_CONTAINER = this.makeCollection(collection, DOM_MAIN)
 
             collection.todos.forEach(todo => {
-                const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_CONTAINER)
+                const DOM_COLLECTION_LIST = DOM_COLLECTION_CONTAINER.querySelector('.collection-list')
+                const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_LIST, collection.expanded)
             })
         })
 
