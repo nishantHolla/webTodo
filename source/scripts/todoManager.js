@@ -20,7 +20,7 @@ const TodoManager = new class {
         this.#dataBase.splice(index, 0, {
             name: collectionName,
             todos: [],
-            expanded: true
+            expanded: false
         })
 
     }

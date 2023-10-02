@@ -131,7 +131,7 @@ const UiManager = new class {
         const DOM_ADD_BUTTON = document.createElement('div')
         DOM_ADD_BUTTON.innerText = 'add'
         DOM_ADD_BUTTON.classList.add(
-            'new-collection-icon', 'pointer', 'collection-container',
+            'add-collection-icon', 'pointer', 'collection-container',
             'flex-center', 'material-symbols-outlined'
         )
 

@@ -94,3 +94,8 @@ main {
     resize: none;
     width: 100%;
 }
+
+.add-collection-icon:hover {
+    background: var(--button-hover-bg);
+    color: var(--button-hover-fg);
+}
