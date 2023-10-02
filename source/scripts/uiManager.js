@@ -77,6 +77,21 @@ const UiManager = new class {
         DOM_TODO_MESSAGE.classList.add('todo-message')
         DOM_TODO_MESSAGE.innerText = todo.message
 
+        const DOM_TODO_MESSAGE_INPUT = document.createElement('textarea')
+        DOM_TODO_MESSAGE_INPUT.classList.add('todo-message-input')
+
+        DOM_TODO_MESSAGE.addEventListener('click', () => {
+            DOM_TODO_MESSAGE_INPUT.value = DOM_TODO_MESSAGE.innerText
+            DOM_TODO_CONTAINER.replaceChild(DOM_TODO_MESSAGE_INPUT, DOM_TODO_MESSAGE)
+            DOM_TODO_MESSAGE_INPUT.focus()
+        })
+
+        DOM_TODO_MESSAGE_INPUT.addEventListener('focusout', () => {
+            DOM_TODO_MESSAGE.innerText = DOM_TODO_MESSAGE_INPUT.value
+            DOM_TODO_CONTAINER.replaceChild(DOM_TODO_MESSAGE, DOM_TODO_MESSAGE_INPUT)
+            todo.message = DOM_TODO_MESSAGE.innerText
+        })
+
         DOM_TODO_HEADER.appendChild(this.makeTodoCheckbox(DOM_TODO_CONTAINER, todo))
         DOM_TODO_HEADER.appendChild(DOM_TODO_TITLE)
 
