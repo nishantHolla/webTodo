@@ -1,6 +1,30 @@
 
 const UiManager = new class {
 
+    makeTodo(todo, DOM_TARGET) {
+        const DOM_TODO_CONTAINER = document.createElement('div')
+        DOM_TODO_CONTAINER.classList.add('todo-container')
+
+        const DOM_TODO_HEADER = document.createElement('div')
+        DOM_TODO_HEADER.classList.add('todo-header')
+
+        const DOM_TODO_TITLE = document.createElement('h3')
+        DOM_TODO_TITLE.classList.add('todo-heading')
+        DOM_TODO_TITLE.innerText = todo.title
+
+        const DOM_TODO_MESSAGE = document.createElement('p')
+        DOM_TODO_MESSAGE.classList.add('todo-message')
+        DOM_TODO_MESSAGE.innerText = todo.message
+
+        DOM_TODO_HEADER.appendChild(DOM_TODO_TITLE)
+
+        DOM_TODO_CONTAINER.appendChild(DOM_TODO_HEADER)
+        DOM_TODO_CONTAINER.appendChild(DOM_TODO_MESSAGE)
+
+        DOM_TARGET.appendChild(DOM_TODO_CONTAINER)
+        return DOM_TODO_CONTAINER
+    }
+
     makeCollection(collection, DOM_TARGET) {
         const DOM_COLLECTION_CONTAINER = document.createElement('div')
         DOM_COLLECTION_CONTAINER.classList.add('collection-container')
@@ -21,14 +45,18 @@ const UiManager = new class {
         DOM_COLLECTION_CONTAINER.appendChild(DOM_COLLECTION_LIST)
 
         DOM_TARGET.appendChild(DOM_COLLECTION_CONTAINER)
+        return DOM_COLLECTION_CONTAINER
     }
 
     makeUi(dataBase) {
         const DOM_MAIN = document.querySelector('main')
 
-        console.log(dataBase)
         dataBase.forEach(collection => {
-            this.makeCollection(collection, DOM_MAIN)
+            const DOM_COLLECTION_CONTAINER = this.makeCollection(collection, DOM_MAIN)
+
+            collection.todos.forEach(todo => {
+                const DOM_TODO_CONTAINER = this.makeTodo(todo, DOM_COLLECTION_CONTAINER)
+            })
         })
 
     }
